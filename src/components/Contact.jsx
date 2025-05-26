@@ -14,7 +14,7 @@ const Contact = () => {
     const contactInfo = [
         { icon: 'bx bx-envelope', label: 'Email', value: 'Fajarramadhan561@gmail.com', action: 'mailto:Fajarramadhan561@gmail.com' },
         { icon: 'bx bx-phone', label: 'Phone', value: '+6281234567890', action: 'tel:+6281234567890' },
-        { icon: 'bx bx-map', label: 'Address', value: 'Jakarta, Indonesia', action: '#' },
+        { icon: 'bx bx-map', label: 'Address', value: 'Medan, Indonesia', action: '#' },
     ];
 
     const socialMedia = [
