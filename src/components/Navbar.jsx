@@ -148,7 +148,7 @@ const Navbar = () => {
         }
       `}</style>
 
-      <nav 
+      <nav
         className="navbar navbar-expand-lg bg-white py-3 shadow fixed-top"
         data-aos="fade-down"
       >
@@ -156,7 +156,7 @@ const Navbar = () => {
           <a className="navbar-brand" href="#" data-aos-delay="600" data-aos="fade-right">
             <i className="bx bx-code-alt me-1"></i> MyPortfolio
           </a>
-  
+
           <button
             className="navbar-toggler d-lg-none"
             type="button"
@@ -170,7 +170,7 @@ const Navbar = () => {
             <span className="navbar-toggler-icon"></span>
           </button>
 
-        
+
           <button
             className="mobile-toggle d-lg-none"
             onClick={toggleNavbar}
@@ -208,8 +208,8 @@ const Navbar = () => {
                 </a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="#support">
-                  <i className="bx bx-support me-1"></i> Support Me
+                <a className="nav-link" href="#darkMode" onClick={closeNavbar}>
+                  <i className="bx bx-moon me-1"></i>Dark Mode
                 </a>
               </li>
             </ul>
@@ -217,22 +217,22 @@ const Navbar = () => {
         </div>
       </nav>
 
-    
-      <div 
+
+      <div
         className={`navbar-canvas ${isOpen ? 'show' : ''}`}
         onClick={closeNavbar}
       ></div>
 
-     
+
       <div className={`navbar-menu ${isOpen ? 'show' : ''}`}>
-        <button 
+        <button
           className="close-btn"
           onClick={closeNavbar}
           aria-label="Close menu"
         >
           <i className="bx bx-x"></i>
         </button>
-        
+
         <div className="mt-4">
           <a className="nav-link active" href="#home" onClick={closeNavbar}>
             <i className="bx bx-home me-2"></i> Home
@@ -249,9 +249,10 @@ const Navbar = () => {
           <a className="nav-link" href="#contact" onClick={closeNavbar}>
             <i className="bx bx-envelope me-2"></i> Contact
           </a>
-          <a className="nav-link" href="#support" onClick={closeNavbar}>
-            <i className="bx bx-support me-2"></i> Support Me
+          <a className="nav-link" href="#darkMode" onClick={closeNavbar}>
+            <i className="bx bx-moon me-2"></i> Dark Mode
           </a>
+
         </div>
       </div>
     </>

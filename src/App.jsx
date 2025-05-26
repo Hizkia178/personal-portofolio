@@ -6,6 +6,7 @@ import Skills from "./components/Skills";
 import Project from "./components/Project";
 import ScrollToTop from "./components/ScrollToTopButton";
 import Contact from "./components/Contact";
+import Support from "./components/Support";
 function App() {
   return (
     <>
@@ -15,6 +16,7 @@ function App() {
       <Skills />
       <Project />
       <Contact />
+      <Support />
       <ScrollToTop />
       <Footer />
     </>

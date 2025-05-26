@@ -33,8 +33,7 @@ const Footer = () => {
         { text: 'About', url: '#about' },
         { text: 'Skills', url: '#skills' },
         { text: 'Project', url: '#project' },
-        { text: 'Contact', url: '#contact' },
-        { text: 'Support', url: '#support'}
+        { text: 'Contact', url: '#contact' }
     ];
 
     return (
