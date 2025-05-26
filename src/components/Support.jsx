@@ -423,7 +423,7 @@ const Support = () => {
 
       
             <button 
-                className="support-btn"
+                className="support-btn" data-bs-toggle="tooltip"
                 onClick={() => setShowModal(true)}
                 title="Support Developer"
             >
