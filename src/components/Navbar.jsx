@@ -8,11 +8,9 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
-
   const closeNavbar = () => {
     setIsOpen(false);
   };
-
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -43,6 +41,7 @@ const Navbar = () => {
   return (
     <>
       <style jsx>{`
+        /* Custom styles for mobile canvas */
         .navbar-canvas {
           position: fixed;
           top: 0;
@@ -105,34 +104,16 @@ const Navbar = () => {
           cursor: pointer;
         }
 
-        .hamburger {
-          display: flex;
-          flex-direction: column;
-          width: 25px;
-          height: 20px;
-          justify-content: space-between;
+        .mobile-toggle {
+          background: none;
+          border: none;
+          padding: 0.25rem 0.5rem;
           cursor: pointer;
         }
 
-        .hamburger span {
-          display: block;
-          height: 3px;
-          width: 100%;
-          background: #333;
-          border-radius: 2px;
-          transition: all 0.3s ease;
-        }
-
-        .hamburger.active span:nth-child(1) {
-          transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-          opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-          transform: rotate(-45deg) translate(7px, -6px);
+        .mobile-toggle i {
+          font-size: 1.5rem;
+          color: #333;
         }
 
         /* Hide default bootstrap toggle on mobile */
@@ -175,7 +156,7 @@ const Navbar = () => {
           <a className="navbar-brand" href="#" data-aos-delay="600" data-aos="fade-right">
             <i className="bx bx-code-alt me-1"></i> MyPortfolio
           </a>
-          
+  
           <button
             className="navbar-toggler d-lg-none"
             type="button"
@@ -195,14 +176,10 @@ const Navbar = () => {
             onClick={toggleNavbar}
             aria-label="Toggle navigation"
           >
-            <div className={`hamburger ${isOpen ? 'active' : ''}`}>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
+            <i className="bx bx-menu"></i>
           </button>
 
-        
+          {/* Desktop Menu */}
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto" data-aos-delay="600" data-aos="fade-left">
               <li className="nav-item">
@@ -240,11 +217,13 @@ const Navbar = () => {
         </div>
       </nav>
 
+    
       <div 
         className={`navbar-canvas ${isOpen ? 'show' : ''}`}
         onClick={closeNavbar}
       ></div>
- 
+
+     
       <div className={`navbar-menu ${isOpen ? 'show' : ''}`}>
         <button 
           className="close-btn"
