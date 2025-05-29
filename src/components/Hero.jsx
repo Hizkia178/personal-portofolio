@@ -1,13 +1,12 @@
-import React, { useEffect, useRef } from 'react';
-import { initTooltips } from '../functions/Tooltip';
-import { initPopovers } from "../functions/Popover";
+import React, { useEffect, useRef, useState } from 'react';
 
 const Hero = () => {
   const typedRef = useRef(null);
+  const [consoleLines, setConsoleLines] = useState([]);
+  const [currentTypingLine, setCurrentTypingLine] = useState('');
 
   useEffect(() => {
-    initTooltips();
-    initPopovers();
+    // Typing effect untuk subtitle
     const texts = [
       "Frontend Developer",
       "React Specialist",
@@ -16,25 +15,25 @@ const Hero = () => {
     ];
 
     let currentTextIndex = 0;
-    let currentCharIndex = 0;
+    let typeCharIndex = 0;
     let isDeleting = false;
 
     const typeText = () => {
       const currentText = texts[currentTextIndex];
 
       if (isDeleting) {
-        typedRef.current.textContent = currentText.substring(0, currentCharIndex - 1);
-        currentCharIndex--;
+        typedRef.current.textContent = currentText.substring(0, typeCharIndex - 1);
+        typeCharIndex--;
 
-        if (currentCharIndex === 0) {
+        if (typeCharIndex === 0) {
           isDeleting = false;
           currentTextIndex = (currentTextIndex + 1) % texts.length;
         }
       } else {
-        typedRef.current.textContent = currentText.substring(0, currentCharIndex + 1);
-        currentCharIndex++;
+        typedRef.current.textContent = currentText.substring(0, typeCharIndex + 1);
+        typeCharIndex++;
 
-        if (currentCharIndex === currentText.length) {
+        if (typeCharIndex === currentText.length) {
           isDeleting = true;
           setTimeout(typeText, 2000);
           return;
@@ -45,6 +44,55 @@ const Hero = () => {
     };
 
     typeText();
+
+    // Console typing effect
+    const fullConsoleScript = [
+      "> const developer = new Developer();",
+      "> developer.name = \"Fajar\";", 
+      "> developer.skills = [\"React\", \"JavaScript\", \"CSS\"];",
+      "> developer.passion = \"Frontend Development\";",
+      "> console.log(developer);",
+      "{ name: \"Fajar\", skills: [\"React\", \"JavaScript\", \"CSS\"], passion: \"Frontend Development\" }"
+    ];
+
+    let currentLineIndex = 0;
+    let consoleCharIndex = 0;
+    let completedLines = [];
+
+    const typeConsoleLine = () => {
+      if (currentLineIndex >= fullConsoleScript.length) {
+        // Reset dan mulai ulang dari awal
+        setTimeout(() => {
+          setConsoleLines([]);
+          setCurrentTypingLine('');
+          currentLineIndex = 0;
+          consoleCharIndex = 0;
+          completedLines = [];
+          setTimeout(typeConsoleLine, 1000);
+        }, 3000);
+        return;
+      }
+
+      const currentLine = fullConsoleScript[currentLineIndex];
+      
+      if (consoleCharIndex <= currentLine.length) {
+        setCurrentTypingLine(currentLine.substring(0, consoleCharIndex));
+        consoleCharIndex++;
+        setTimeout(typeConsoleLine, 80);
+      } else {
+        // Line selesai, pindah ke line berikutnya
+        completedLines.push(currentLine);
+        setConsoleLines([...completedLines]);
+        setCurrentTypingLine('');
+        currentLineIndex++;
+        consoleCharIndex = 0;
+        setTimeout(typeConsoleLine, 500);
+      }
+    };
+
+    // Mulai console typing setelah delay
+    setTimeout(typeConsoleLine, 1000);
+
   }, []);
 
   return (
@@ -236,6 +284,141 @@ const Hero = () => {
           0%, 100% { transform: translateX(-50%) translateY(0px); }
           50% { transform: translateX(-50%) translateY(-10px); }
         }
+
+        .container {
+          max-width: 1200px;
+          margin: 0 auto;
+          padding: 0 20px;
+        }
+
+        .row {
+          display: flex;
+          flex-wrap: wrap;
+          margin: -15px;
+        }
+
+        .col-lg-6 {
+          flex: 0 0 50%;
+          max-width: 50%;
+          padding: 15px;
+        }
+
+        @media (max-width: 768px) {
+          .col-lg-6 {
+            flex: 0 0 100%;
+            max-width: 100%;
+          }
+        }
+
+        .d-flex {
+          display: flex;
+        }
+
+        .align-items-center {
+          align-items: center;
+        }
+
+        .flex-wrap {
+          flex-wrap: wrap;
+        }
+
+        .gap-3 {
+          gap: 1rem;
+        }
+
+        .gap-4 {
+          gap: 1.5rem;
+        }
+
+        .mb-3 {
+          margin-bottom: 1rem;
+        }
+
+        .mb-4 {
+          margin-bottom: 1.5rem;
+        }
+
+        .mb-5 {
+          margin-bottom: 3rem;
+        }
+
+        .text-muted {
+          color: #6c757d;
+        }
+
+        .text-white {
+          color: white;
+        }
+
+        .ms-3 {
+          margin-left: 1rem;
+        }
+
+        .me-2 {
+          margin-right: 0.5rem;
+        }
+
+        .display-4 {
+          font-size: 3.5rem;
+          font-weight: 300;
+          line-height: 1.2;
+        }
+
+        .h3 {
+          font-size: 1.75rem;
+        }
+
+        .lead {
+          font-size: 1.25rem;
+          font-weight: 300;
+        }
+
+        .fw-bold {
+          font-weight: 700;
+        }
+
+        .btn {
+          padding: 0.5rem 1rem;
+          border-radius: 0.25rem;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          font-weight: 500;
+          transition: all 0.3s ease;
+        }
+
+        .btn-lg {
+          padding: 0.75rem 1.5rem;
+          font-size: 1.125rem;
+        }
+
+        .px-4 {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+
+        .py-2 {
+          padding-top: 0.5rem;
+          padding-bottom: 0.5rem;
+        }
+
+        .btn-outline-dark {
+          border: 2px solid #212529;
+          color: #212529;
+          background: transparent;
+        }
+
+        .btn-outline-dark:hover {
+          background: #212529;
+          color: white;
+          transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+          .display-4 {
+            font-size: 2.5rem;
+          }
+        }
       `}</style>
 
       <section className="hero-bg d-flex  align-items-center" data-aos-duration="1000" data-aos="fade-down" id='home'>
@@ -307,51 +490,38 @@ const Hero = () => {
                   <span className="text-white ms-3">developer-console</span>
                 </div>
                 <div className="console-body">
-                  <div className="mb-2">
-                    <span style={{ color: '#ff6b6b' }}>&gt;</span>
-                    <span style={{ color: '#4ecdc4' }}> const</span>
-                    <span style={{ color: '#ffe66d' }}> developer</span>
-                    <span style={{ color: '#ff6b6b' }}> =</span>
-                    <span style={{ color: '#95e1d3' }}> new</span>
-                    <span style={{ color: '#a8e6cf' }}> Developer()</span>;
-                  </div>
-                  <div className="mb-2">
-                    <span style={{ color: '#ff6b6b' }}>&gt;</span>
-                    <span style={{ color: '#ffe66d' }}>developer</span>
-                    <span style={{ color: '#ff6b6b' }}>.</span>
-                    <span style={{ color: '#4ecdc4' }}>name</span>
-                    <span style={{ color: '#ff6b6b' }}>=</span>
-                    <span style={{ color: '#a8e6cf' }}>"Fajar"</span>;
-                  </div>
-                  <div className="mb-2">
-                    <span style={{ color: '#ff6b6b' }}>&gt;</span>
-                    <span style={{ color: '#ffe66d' }}>developer</span>
-                    <span style={{ color: '#ff6b6b' }}>.</span>
-                    <span style={{ color: '#4ecdc4' }}>skills</span>
-                    <span style={{ color: '#ff6b6b' }}>=</span>
-                    <span style={{ color: '#a8e6cf' }}>["React", "JavaScript", "CSS"]</span>;
-                  </div>
-                  <div className="mb-2">
-                    <span style={{ color: '#ff6b6b' }}>&gt;</span>
-                    <span style={{ color: '#ffe66d' }}>developer</span>
-                    <span style={{ color: '#ff6b6b' }}>.</span>
-                    <span style={{ color: '#4ecdc4' }}>passion</span>
-                    <span style={{ color: '#ff6b6b' }}>=</span>
-                    <span style={{ color: '#a8e6cf' }}>"Frontend Development"</span>;
-                  </div>
-                  <div className="mb-3">
-                    <span style={{ color: '#ff6b6b' }}>&gt;</span>
-                    <span style={{ color: '#95e1d3' }}>console</span>
-                    <span style={{ color: '#ff6b6b' }}>.</span>
-                    <span style={{ color: '#4ecdc4' }}>log</span>
-                    <span style={{ color: '#a8e6cf' }}>(developer)</span>;
-                  </div>
-                  <div style={{ color: '#00ff00' }}>
-                    &#123; name: "Fajar", skills: ["React", "JavaScript", "CSS"], passion: "Frontend Development" &#125;
-                  </div>
-                  <div className="mt-3">
-                    <span style={{ color: '#ff6b6b' }}>&gt;</span>
-                    <span className="typing-cursor">_</span>
+                  {consoleLines.map((line, index) => (
+                    <div key={index} style={{ marginBottom: '8px' }}>
+                      {line.startsWith('>') ? (
+                        <span>
+                          <span style={{ color: '#ff6b6b' }}>&gt;</span>
+                          <span style={{ color: '#4ecdc4' }}>{line.substring(1)}</span>
+                        </span>
+                      ) : (
+                        <span style={{ color: '#00ff00' }}>{line}</span>
+                      )}
+                    </div>
+                  ))}
+                  
+                  {currentTypingLine && (
+                    <div style={{ marginBottom: '8px' }}>
+                      {currentTypingLine.startsWith('>') ? (
+                        <span>
+                          <span style={{ color: '#ff6b6b' }}>&gt;</span>
+                          <span style={{ color: '#4ecdc4' }}>{currentTypingLine.substring(1)}</span>
+                          <span className="typing-cursor" style={{ color: '#00ff00' }}>_</span>
+                        </span>
+                      ) : (
+                        <span>
+                          <span style={{ color: '#00ff00' }}>{currentTypingLine}</span>
+                          <span className="typing-cursor" style={{ color: '#00ff00' }}>_</span>
+                        </span>
+                      )}
+                    </div>
+                  )}
+                  
+                  <div style={{ color: '#666', marginTop: '20px', fontSize: '12px' }}>
+                    // Console is running... Keep coding! 🚀
                   </div>
                 </div>
               </div>

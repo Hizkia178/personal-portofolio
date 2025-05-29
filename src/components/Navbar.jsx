@@ -207,11 +207,7 @@ const Navbar = () => {
                   <i className="bx bx-envelope me-1"></i> Contact
                 </a>
               </li>
-              <li className="nav-item">
-                <a className="nav-link" href="#darkMode" onClick={closeNavbar}>
-                  <i className="bx bx-moon me-1"></i>Dark Mode
-                </a>
-              </li>
+             
             </ul>
           </div>
         </div>
@@ -249,9 +245,7 @@ const Navbar = () => {
           <a className="nav-link" href="#contact" onClick={closeNavbar}>
             <i className="bx bx-envelope me-2"></i> Contact
           </a>
-          <a className="nav-link" href="#darkMode" onClick={closeNavbar}>
-            <i className="bx bx-moon me-2"></i> Dark Mode
-          </a>
+        
 
         </div>
       </div>
