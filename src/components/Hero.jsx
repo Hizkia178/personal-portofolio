@@ -456,7 +456,7 @@ const Hero = () => {
                   <i className="bx bx-briefcase me-2"></i>
                   See My Work
                 </a>
-                <a href="#portfolio" className="btn btn-outline-dark btn-lg px-4 py-2" data-bs-toggle="tooltip" title='See My Portofolio'>
+                <a href="#portfolio" className="btn  btn-gradient btn-outline-dark btn-lg px-4 py-2" data-bs-toggle="tooltip" title='See My Portofolio'>
                   <i className="bx bx-briefcase me-2"></i>
                   My Portfolio
                 </a>
